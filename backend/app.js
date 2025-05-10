@@ -52,7 +52,7 @@ io.on("connection", (socket) => {
             tasks.push(data);
             console.log("Tasks", tasks);
 
-            if (tasks.length >= 5) {
+            if (tasks.length >= 50) {
                 for (const t of tasks) {
                     await new Task({ task: t.task }).save();
                 }
