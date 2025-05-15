@@ -53,7 +53,7 @@ io.on("connection", (socket) => {
             console.log("Tasks", tasks);
             console.log("data",data);
 
-            if (tasks.length >= 5) {
+            if (tasks.length >= 3) {
                 for (const t of tasks) {
                     await new Task({ task: t.task }).save();
                 }
@@ -61,7 +61,7 @@ io.on("connection", (socket) => {
                 await client.set(REDIS_KEY, JSON.stringify([]));
                 console.log("Tasks moved");
 
-                
+                io.emit("tasks-fetched", [data]);
                 
             } else {
                 await client.set(REDIS_KEY, JSON.stringify(tasks));
