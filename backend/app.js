@@ -81,7 +81,7 @@ io.on("connection", (socket) => {
         try {
             let taskData = await client.get(REDIS_KEY);
             let mongotasks = await Task.find().sort({_id : -1})
-            const alltasks = [];
+            let alltasks = [];
             if (taskData) {
                 taskData = JSON.parse(taskData);
                 alltasks = [...mongotasks,...taskData];
