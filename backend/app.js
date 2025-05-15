@@ -81,14 +81,15 @@ io.on("connection", (socket) => {
         try {
             let taskData = await client.get(REDIS_KEY);
             let mongotasks = await Task.find().sort({_id : -1})
+            const alltasks = [];
             if (taskData) {
                 taskData = JSON.parse(taskData);
                 alltasks = [...mongotasks,...taskData];
             } else {
-                taskData = mongotasks;
+                alltasks = mongotasks;
             }
             
-            socket.emit("tasks-fetched", alltasks);
+            socket.emit("tasks-fetched", alltasks ? alltasks : []);
         } catch (error) {
             console.log("Error getting tasks:", error);
         }
