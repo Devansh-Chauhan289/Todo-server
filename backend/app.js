@@ -91,7 +91,7 @@ io.on("connection", (socket) => {
                 console.log("only mongo task");
             }
             
-            socket.emit("tasks-fetched", alltasks ? alltasks : []);
+            io.emit("tasks-fetched", alltasks ? alltasks : []);
         } catch (error) {
             console.log("Error getting tasks:", error);
         }
