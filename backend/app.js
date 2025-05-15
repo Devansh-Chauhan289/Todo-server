@@ -85,8 +85,10 @@ io.on("connection", (socket) => {
             if (taskData) {
                 taskData = JSON.parse(taskData);
                 alltasks = [...mongotasks,...taskData];
+                console.log("contains task form redis");
             } else {
                 alltasks = mongotasks;
+                console.log("only mongo task");
             }
             
             socket.emit("tasks-fetched", alltasks ? alltasks : []);
