@@ -51,6 +51,7 @@ io.on("connection", (socket) => {
 
             tasks.push(data);
             console.log("Tasks", tasks);
+            console.log("data",data);
 
             if (tasks.length >= 5) {
                 for (const t of tasks) {
@@ -71,7 +72,7 @@ io.on("connection", (socket) => {
                 // const allTasks = [...mongoTasks, ...tasks];
                 
 
-                io.emit("tasks-fetched", data);
+                io.emit("tasks-fetched", tasks[-1]);
             }
         } catch (error) {
             console.log("Error adding task:", error);
