@@ -62,6 +62,7 @@ io.on("connection", (socket) => {
                 console.log("Tasks moved");
 
                 
+                
             } else {
                 await client.set(REDIS_KEY, JSON.stringify(tasks));
                 console.log("Task stored in Redis:", tasks);
