@@ -67,7 +67,10 @@ io.on("connection", (socket) => {
                 await client.set(REDIS_KEY, JSON.stringify(tasks));
                 console.log("Task stored in Redis:", tasks);
 
-                io.emit("task-added", tasks);
+                const mongoTasks = await Task.find().sort({ _id: -1 });
+                const allTasks = [...tasks, ...mongoTasks];
+
+                io.emit("tasks-fetched", allTasks);
             }
         } catch (error) {
             console.log("Error adding task:", error);
@@ -77,15 +80,15 @@ io.on("connection", (socket) => {
     socket.on("get-tasks", async () => {
         try {
             let taskData = await client.get(REDIS_KEY);
-            let mongotasks = await Task.find()
+            let mongotasks = await Task.find().sort({_id : -1})
             if (taskData) {
                 taskData = JSON.parse(taskData);
-                taskData = [...taskData, ...mongotasks];
+                alltasks = [...mongotasks,...taskData];
             } else {
                 taskData = mongotasks;
             }
             
-            socket.emit("tasks-fetched", taskData ? taskData : []);
+            socket.emit("tasks-fetched", alltasks);
         } catch (error) {
             console.log("Error getting tasks:", error);
         }
