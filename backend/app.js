@@ -71,7 +71,7 @@ io.on("connection", (socket) => {
                 // const allTasks = [...mongoTasks, ...tasks];
                 
 
-                io.emit("tasks-fetched", data.task);
+                io.emit("tasks-fetched", data);
             }
         } catch (error) {
             console.log("Error adding task:", error);
