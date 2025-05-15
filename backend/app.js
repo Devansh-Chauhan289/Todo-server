@@ -67,10 +67,10 @@ io.on("connection", (socket) => {
                 await client.set(REDIS_KEY, JSON.stringify(tasks));
                 console.log("Task stored in Redis:", tasks);
 
-                const mongoTasks = await Task.find().sort({ _id: -1 });
-                const allTasks = [...tasks, ...mongoTasks];
+                // const mongoTasks = await Task.find().sort({ _id: -1 });
+                
 
-                io.emit("tasks-fetched", allTasks);
+                // io.emit("tasks-fetched", allTasks);
             }
         } catch (error) {
             console.log("Error adding task:", error);
