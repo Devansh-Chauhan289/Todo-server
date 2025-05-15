@@ -62,8 +62,6 @@ io.on("connection", (socket) => {
                 console.log("Tasks moved");
 
                 
-                const mongoTasks = await Task.find().sort({ _id: -1 });
-                io.emit("tasks-fetched", mongoTasks);
             } else {
                 await client.set(REDIS_KEY, JSON.stringify(tasks));
                 console.log("Task stored in Redis:", tasks);
