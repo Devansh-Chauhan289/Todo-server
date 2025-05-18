@@ -29,6 +29,7 @@ app.use(cors({
     methods: ["GET", "POST"],
     credentials: true,
 }));
+app.options('*', cors());
 
 app.use("/task", TaskRouter);
 
