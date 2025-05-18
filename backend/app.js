@@ -25,7 +25,7 @@ const REDIS_KEY = "FULLSTACK_TASK_DEVANSH_CHAUHAN";
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: ["http://localhost:5173","https://ping-me-frt.vercel.app"],
     methods: ["GET", "POST"],
     credentials: true,
 }));
@@ -34,7 +34,7 @@ app.use("/task", TaskRouter);
 
 const io = new Server(httpServer, {
     cors: {
-        origin: "http://localhost:5173",
+        origin: ["http://localhost:5173","https://ping-me-frt.vercel.app"],
         methods: ["GET", "POST"],
         credentials: true,
     },
